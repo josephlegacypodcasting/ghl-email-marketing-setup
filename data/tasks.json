@@ -1,0 +1,208 @@
+[
+  [
+    "01 · Configure GHL + LC Email",
+    "Core · start here",
+    [
+      [
+        "03",
+        "Configure LC Email and record sending capacity",
+        "Joseph",
+        "—",
+        "LC Email active, wallet funded, actual limit/usage/reset time recorded.",
+        "Technical"
+      ],
+      [
+        "09",
+        "Connect mail.marketbetter.xyz",
+        "Joseph",
+        "03",
+        "Exact provider DNS records verify; existing root-domain mail still works.",
+        "Technical"
+      ],
+      [
+        "10",
+        "Configure SPF, DKIM and DMARC alignment",
+        "Joseph",
+        "09",
+        "Received test headers pass authentication and DMARC alignment; reporting configured.",
+        "Technical"
+      ],
+      [
+        "11",
+        "Set From, Reply-To and tracking settings",
+        "Joseph",
+        "10",
+        "Sender identity is consistent, replies arrive and tracked links resolve.",
+        "Technical"
+      ]
+    ]
+  ],
+  [
+    "02 · Prepare the 8,000-contact audience",
+    "Core · can run alongside domain setup",
+    [
+      [
+        "14",
+        "Reconcile the migrated audience",
+        "Joseph",
+        "—",
+        "Historical opted-in contacts are identified; source, consent and suppression survived migration.",
+        "Technical"
+      ],
+      [
+        "16",
+        "Validate and deduplicate email addresses",
+        "Joseph",
+        "14",
+        "Sendable unique records are separated from invalid or uncertain addresses.",
+        "Technical"
+      ],
+      [
+        "17",
+        "Apply email suppression / DND",
+        "Joseph",
+        "16",
+        "Unsubscribes, complaints and hard bounces are excluded from every marketing path.",
+        "Technical"
+      ],
+      [
+        "18",
+        "Create pilot and full-send Smart Lists",
+        "Joseph",
+        "17",
+        "Lists have verified filters/counts and exclude suppression plus same-event registrants.",
+        "Technical"
+      ]
+    ]
+  ],
+  [
+    "03 · Build the campaign",
+    "Core · draft and controlled tests only",
+    [
+      [
+        "21",
+        "Build the invitation template",
+        "Joseph",
+        "11",
+        "Template renders correctly with safe personalization and the correct event link.",
+        "Technical"
+      ],
+      [
+        "22",
+        "Test body and one-click unsubscribe",
+        "Joseph",
+        "21",
+        "Both opt-out routes update suppression and block subsequent marketing.",
+        "Technical"
+      ],
+      [
+        "24",
+        "Run end-to-end campaign QA",
+        "Joseph",
+        "18, 22",
+        "Rendering, headers, links, fallback values and suppression pass controlled tests.",
+        "Technical"
+      ],
+      [
+        "25",
+        "Configure and test batch delivery",
+        "Joseph",
+        "24",
+        "Small test confirms batch quantity, interval, timezone and recipient selection.",
+        "Technical"
+      ]
+    ]
+  ],
+  [
+    "04 · Monitor, warm up and send",
+    "Core · increase based on results",
+    [
+      [
+        "30",
+        "Configure delivery monitoring",
+        "Joseph",
+        "03",
+        "Send log and available delivery/complaint signals are accessible.",
+        "Technical"
+      ],
+      [
+        "31",
+        "Test pause and recovery controls",
+        "Joseph",
+        "25, 30",
+        "Operator can stop pending batches and related workflow emails; restart behavior understood.",
+        "Technical"
+      ],
+      [
+        "33",
+        "Send a small engaged pilot",
+        "Joseph",
+        "31",
+        "Pilot results reviewed; no unresolved authentication, suppression or delivery failures.",
+        "Technical"
+      ],
+      [
+        "34",
+        "Ramp volume gradually",
+        "Joseph",
+        "33",
+        "Healthy results across several sends support the next volume; no unresolved stop trigger.",
+        "Technical"
+      ],
+      [
+        "35",
+        "Check final recipients and remaining capacity",
+        "Joseph",
+        "18, 34",
+        "Eligible audience fits remaining daily capacity; event registrant exclusions are current.",
+        "Technical"
+      ],
+      [
+        "37",
+        "Send the full approved volume",
+        "Joseph",
+        "35",
+        "Batches execute correctly, are monitored and stay within account restrictions.",
+        "Technical"
+      ]
+    ]
+  ],
+  [
+    "05 · Event registration sync",
+    "Follow-on module · not a provider-selection gate",
+    [
+      [
+        "26",
+        "Sync Eventbrite / Contrast registrations into GHL",
+        "Joseph",
+        "18",
+        "New and existing contacts upsert correctly with per-event status, source and error logging.",
+        "Technical"
+      ],
+      [
+        "27",
+        "Stop same-event invitations after registration",
+        "Joseph",
+        "26",
+        "Confirmed event registration suppresses invitations for that event; Contrast retains attendee emails.",
+        "Technical"
+      ],
+      [
+        "28",
+        "Check registration freshness before follow-ups",
+        "Joseph",
+        "27",
+        "Workflow checks permission, suppression, event state and sync freshness before sending.",
+        "Technical"
+      ],
+      [
+        "29",
+        "Test sync duplicates, delays and recovery",
+        "Joseph",
+        "28",
+        "New/existing/replayed/failed updates pass; permission and suppression remain intact.",
+        "Technical"
+      ]
+    ]
+  ]
+]

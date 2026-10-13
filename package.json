@@ -1,0 +1,9 @@
+{
+  "name": "ghl-email-marketing-setup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Market Better technical GHL email build plan and local evidence tracker",
+  "scripts": {
+    "test": "node tests/tracker.test.cjs"
+  }
+}

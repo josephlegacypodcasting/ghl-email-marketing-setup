@@ -1,0 +1,200 @@
+{
+  "10": {
+    "steps": [
+      "Verify the provider-issued SPF and DKIM records and review the DMARC policy covering the visible From domain.",
+      "Configure a monitored DMARC reporting address and an appropriate policy with the DNS admin; do not weaken an existing enforced policy blindly.",
+      "Send a controlled test and inspect original headers. Confirm DMARC passes using aligned SPF or DKIM.",
+      "Fix failures before production sends and retain header evidence."
+    ],
+    "ascii": "Visible From domain\n       |\n       +--> SPF identity + alignment\n       +--> DKIM identity + alignment\n                       |\n                       v\n             DMARC pass + reporting"
+  },
+  "11": {
+    "steps": [
+      "Select an approved From name and authenticated From address; verify the address is supported by the configured domain.",
+      "Set the Reply-To to a monitored mailbox and assign who responds to incoming questions.",
+      "Check campaign and workflow sender settings so defaults do not override the intended identity unexpectedly.",
+      "Send a test, reply to it and verify both receipt and the appearance/function of tracked links."
+    ],
+    "ascii": "Campaign / workflow\n       |\n       v\nApproved From --> recipient\n                     |\n                     v\nReply-To mailbox --> assigned responder"
+  },
+  "14": {
+    "steps": [
+      "Back up the GHL audience or preserve an approved source export before cleanup.",
+      "Compare HubSpot migration records with GHL email identities, opt-in evidence, exclusions and original contact source.",
+      "Resolve missing or conflicting suppression data. Keep uncertain records outside the sending audience until reconciled.",
+      "Record the actual historical-audience count. Permission already exists according to the brief; this task verifies it was retained during migration."
+    ],
+    "ascii": "HubSpot migration evidence --> GHL audit\n                     |\n                     +--> Opt-in / source retained\n                     +--> Suppression retained\n                     +--> Gaps --> hold / resolve"
+  },
+  "16": {
+    "steps": [
+      "Select the eligible audience, use LC Email validation or the existing verification process.",
+      "Run validation and review valid, invalid and uncertain outcomes; validation does not establish consent.",
+      "Deduplicate by normalized email, preserving useful history and the most restrictive suppression state.",
+      "Quarantine invalid and uncertain addresses and reconcile the resulting count against the original list."
+    ],
+    "ascii": "Eligible records\n       |\n       v\nValidation + duplicate review\n       |\n       +--> Approved valid unique records\n       +--> Invalid / uncertain --> quarantine"
+  },
+  "17": {
+    "steps": [
+      "Identify existing email DND, unsubscribe, complaint and hard-bounce states in the account.",
+      "Apply the supported email suppression controls and create an explicit exclusion rule for marketing audiences.",
+      "Check that imports, tags and workflow enrollment cannot silently reactivate opted-out contacts.",
+      "Use controlled test contacts to verify that campaigns and workflows both exclude suppressed recipients; record actual behavior."
+    ],
+    "ascii": "Unsubscribe / complaint / hard bounce\n                  |\n                  v\n          Email suppression / DND\n                  |\n                  v\n      Excluded from campaigns + workflows"
+  },
+  "18": {
+    "steps": [
+      "In Contacts, create an eligible historical-audience Smart List with valid email and email suppression exclusions.",
+      "Create an engaged pilot list using recent clicks, responses or other relevant customer activity. Reported historical responses are only 30–110 out of 8,000; permission alone does not make all 8,000 engaged.",
+      "For event invitations, exclude confirmed registrants for the specific event using a reconciled import or working sync.",
+      "Inspect sample contacts and counts. Keep event registration separate from future-marketing permission."
+    ],
+    "ascii": "Historical audience --> valid + not suppressed\n                               |\n                               +--> Engaged pilot\n                               +--> Full invitation list\nExclude confirmed registrants for this event"
+  },
+  "21": {
+    "steps": [
+      "In Marketing > Email, create a reusable Market Better invitation template.",
+      "Set the configured From/Reply-To, subject, event details and the intended Eventbrite/Contrast registration link.",
+      "Add personalization with safe fallbacks, postal address and the supported unsubscribe element.",
+      "Save and preview desktop/mobile. GHL sends invitations; Contrast sends confirmations and reminders to registered attendees."
+    ],
+    "ascii": "Sender + event details + brand\n             |\n             v\nGHL invitation template --> registration link\n             |\n             v\nPreview + personalization test"
+  },
+  "22": {
+    "steps": [
+      "Add GHL’s supported unsubscribe element to every marketing template and confirm it is visible and usable.",
+      "Send a controlled test and inspect received headers for List-Unsubscribe and List-Unsubscribe-Post one-click support.",
+      "Use the body opt-out and the mailbox’s one-click route where available; confirm requests update email suppression.",
+      "Verify no later marketing reaches that test contact. A body link alone does not replace the required one-click headers."
+    ],
+    "ascii": "Marketing message\n  +--> Body opt-out link\n  +--> One-click unsubscribe headers\n                    |\n                    v\n          Suppression --> no later marketing"
+  },
+  "24": {
+    "steps": [
+      "Create controlled test contacts representing normal recipients, missing personalization data and opted-out recipients.",
+      "Send tests and inspect desktop/mobile layout, sender identity, headers and all links.",
+      "Unsubscribe a test contact and attempt a later small campaign/workflow test; verify suppression without exposing real contacts.",
+      "Record pass/fail results and screenshots or message references; fix failures before signing off."
+    ],
+    "ascii": "Test contact matrix\n  +--> Normal recipient --> correct layout / links\n  +--> Missing name ----> safe fallback\n  +--> Unsubscribed ---> excluded\n                 |\n                 v\n             QA evidence"
+  },
+  "25": {
+    "steps": [
+      "Open Marketing > Email > Campaigns and create a test campaign for controlled recipients only.",
+      "Choose Send / Schedule > Batch Schedule; configure a small test quantity, repeat interval, active days and timezone.",
+      "Verify recipients and observed batch timestamps. Keep the production list out of this configuration test.",
+      "Save a final-cadence preset of 250 every 15 minutes, but use it at full scale only after the warm-up and capacity checks."
+    ],
+    "ascii": "Controlled test audience\n          |\n          v\nBatch Schedule: quantity + interval + timezone\n          |\n          v\nObserved timing / recipient count / stop test"
+  },
+  "26": {
+    "steps": [
+      "Inspect supported Eventbrite, Contrast and GHL integrations, exports, APIs or webhooks available in the actual accounts. Select and cost a verified route.",
+      "Map normalized email/names, original/latest source, marketing permission, event ID, external registration ID and status/time; confirm registration in Contrast before marking it confirmed in GHL.",
+      "Implement contact upsert and duplicate-event protection. Many attendees are new; check existing identities first, retain the event source, preserve opt-outs and do not grant future-marketing consent from event registration alone.",
+      "Add an integration log, retries/reconciliation and error ownership. Test both new Eventbrite leads and existing GHL contacts; a controlled import can be an interim route only with documented latency."
+    ],
+    "ascii": "Eventbrite --> verified transfer --> Contrast\n                                       |\n                                       v\n                           Confirmed registration\n                                       |\n                                       v\nSync / reconciled import --> match normalized email\n       + existing --> update contact + event\n       + new ------> create contact + event\nFailure --> log / retry / reconciliation"
+  },
+  "27": {
+    "steps": [
+      "Use the confirmed registration update for a stable event ID to drive GHL’s registration marker or equivalent event-history record.",
+      "Stop or skip invitation follow-ups for that event while preserving eligibility for future shows when permission allows.",
+      "Keep confirmation, join-link and attendee reminders in Contrast; disable any conflicting GHL workflow messages for this purpose.",
+      "Test both new and existing registrants, including someone registered for an earlier show, and verify no duplicate email handoff occurs."
+    ],
+    "ascii": "Contrast confirms event X registration\n                   |\n                   v\nGHL event X status --> stop invitations X\n                   |\n                   +--> Future event Y: re-evaluate\nContrast sends attendee confirmations / reminders"
+  },
+  "28": {
+    "steps": [
+      "Before each GHL invitation or follow-up, recheck marketing permission, suppression and recipient frequency.",
+      "Check confirmed registration for this specific event, not a permanent registered flag left from an earlier event.",
+      "Check registration-sync freshness and unresolved errors; hold follow-ups and reconcile when the data cannot be trusted.",
+      "Test registration or unsubscribe during a workflow wait. Ensure the next GHL invitation is skipped while Contrast owns attendee reminders."
+    ],
+    "ascii": "Before GHL invitation X\n        |\n        v\nPermission + not suppressed + fresh event data?\n        + NO --> hold / skip\n        + YES --> registered for event X?\n                    + YES --> skip invitation\n                    + NO ---> send if frequency allows"
+  },
+  "29": {
+    "steps": [
+      "Build controlled cases for a new Eventbrite lead, an existing migrated GHL contact and a contact already unsubscribed from marketing.",
+      "Replay the same registration update, register someone for two shows and simulate a delayed or failed sync; use test mechanisms supported by the chosen route.",
+      "Verify one contact per identity, event-specific status and source attribution, preserved permission/suppression and no automatic marketing reactivation for new Eventbrite/Contrast attendees.",
+      "Confirm Contrast owns attendee reminders and GHL same-event follow-ups stop. Test retry/reconciliation and document counts, timestamps and remaining exceptions."
+    ],
+    "ascii": "Test cases --> registration sync\n + new / existing --> create OR update\n + replay ---------> no duplicate\n + prior opt-out --> suppression retained\n + event X / Y ----> separate event states\n + failure --------> recover / reconcile\n                     |\n                     v\nNo duplicate attendee reminders"
+  },
+  "30": {
+    "steps": [
+      "Create a send log containing campaign ID, segment, time, recipient count, sent count and current account allowance.",
+      "Record invited, delivered, clicked, responded, registered and attended separately. Confirm the definition of response and keep the 30–110 historical estimate separate from measured results.",
+      "Verify Google Postmaster Tools access where possible; record its Gmail signals separately from GHL metrics.",
+      "Match event attendance to existing/new GHL contacts and event source. About 60%–75% of 250 attendees are reportedly new; do not attribute them all to GHL email. Record missing or delayed data explicitly."
+    ],
+    "ascii": "GHL campaign results + Gmail signals\n                   |\n                   v\n           Send log / monitoring\n                   |\n                   v\n           Continue / slow / pause"
+  },
+  "31": {
+    "steps": [
+      "Use the operating thresholds below and identify the operator who will pause campaign batches and related workflow sends.",
+      "On a controlled scheduled campaign, use Marketing > Email > Campaigns > actions menu to test Pause and confirm its state.",
+      "Test stopping related workflow sends separately; document messages already queued or delivered and the restart procedure.",
+      "Record that Resume after the original scheduled time can send immediately. Recheck audience and capacity before any restart; Cancel cannot be resumed."
+    ],
+    "ascii": "Warning / stop signal\n          |\n          +--> Pause future campaign batches\n          +--> Stop related workflow sends\n          |\n          v\nFix --> smaller test --> explicit restart review"
+  },
+  "33": {
+    "steps": [
+      "Select the engaged pilot list and a small starting volume appropriate to account history and live limits.",
+      "Recheck funding, sender authentication, suppression and the tested template; schedule the pilot.",
+      "Monitor headers, failures, bounces, deferrals and feedback; review delayed engagement/complaint reports when available.",
+      "Record the outcome and fix or hold on failures before increasing volume."
+    ],
+    "ascii": "Small pilot --> delivery / feedback evidence\n                       |\n                       v\n                 Healthy results?\n                 + YES --> consider next step\n                 + NO ---> hold / fix / retest"
+  },
+  "34": {
+    "steps": [
+      "Review several sends using bounces, deferrals, complaints, authentication and engagement. A reported 0.38%–1.38% response-to-base ratio alone is not a deliverability test or automatic stop/go threshold.",
+      "Continue prioritizing engaged recipients and avoid abrupt spikes or forcing the full list into the early warm-up.",
+      "Log each volume change and the evidence behind it; hold, reduce or pause if signals deteriorate.",
+      "Advance toward 8,000/day only when results support it. Stage progression and elapsed days alone do not prove inbox readiness."
+    ],
+    "ascii": "Small healthy sends\n        |\n        v\nEvidence review --> gradual increase\n        ^                 |\n        |                 v\n        +-------- monitor next send\nBad signals --> reduce / pause"
+  },
+  "35": {
+    "steps": [
+      "Refresh suppression and the full-send list immediately before scheduling.",
+      "For show invitations, reconcile confirmed Contrast registrants using the working sync or a controlled import; exclude them for this event.",
+      "Check remaining daily allowance and other campaign/workflow traffic; account for reset time and the actual recipient count.",
+      "If data is stale or capacity is insufficient, reconcile, reduce or reschedule. Do not bypass limits with batching."
+    ],
+    "ascii": "Fresh eligible audience + event exclusions\n                     |\n                     v\n        Compare with remaining capacity\n           + fits --> schedule\n           + gap ---> reduce / reschedule"
+  },
+  "37": {
+    "steps": [
+      "Select the refreshed recipient list and tested invitation template in GHL Campaigns.",
+      "Choose Batch Schedule: 250 recipients, repeat every 15 minutes, in the intended eight-hour window and timezone.",
+      "For exactly 8,000 recipients, use 32 batches. The final batch starts 7 hours 45 minutes after the first; allow processing time. Larger lists require extra batches/time within limits.",
+      "Monitor the send, apply stop rules and refresh suppression before any follow-up. Technical readiness, not an event deadline, determines when full volume starts."
+    ],
+    "ascii": "Ready audience --> GHL Batch Schedule\n                        |\n                        v\n250 every 15 min x 32 = 8,000\n                        |\n                        v\nMonitor --> continue OR pause / fix"
+  },
+  "03": {
+    "steps": [
+      "Open the target GHL sub-account > Settings > Email Services and confirm LC Email is active.",
+      "Check account status and live sending allowance, remaining capacity and reset time. Include existing campaign/workflow traffic.",
+      "Check agency wallet/credits and ensure funding covers the intended sends; resolve activation or billing errors.",
+      "Record these technical settings. LC Email is the selected sending path; no provider-comparison task is required."
+    ],
+    "ascii": "GHL sub-account --> LC Email active\n                         |\n                         v\n            Funded wallet + live sending limit\n                         |\n                         v\n               Configure sending domain"
+  },
+  "09": {
+    "steps": [
+      "Check the existing DNS records for marketbetter.xyz and mail.marketbetter.xyz; record current values before editing.",
+      "In Settings > Email Services > Dedicated Domain and IP, add mail.marketbetter.xyz.",
+      "Add the exact provider-generated DNS records at the DNS host. Keep root-domain mailbox routing intact and avoid duplicate SPF records at one hostname.",
+      "Wait for DNS propagation and verify the domain in GHL; fix conflicts before continuing."
+    ],
+    "ascii": "GHL: Add sending domain\n             |\n             v\nProvider-generated DNS records\n             |\n             v\nDNS provider --> propagation --> GHL verification"
+  }
+}
